@@ -1,20 +1,46 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🦅 Aegis - Foco no Alvo
 
-# Run and deploy your AI Studio app
+> "Siga o Protocolo."
 
-This contains everything you need to run your app locally.
+O **Aegis** é uma aplicação mobile focada em produtividade, disciplina e gerenciamento de rotinas. Diferente de listas de tarefas comuns, o Aegis utiliza conceitos de gamificação (XP, Níveis, Conquistas) para incentivar a constância e o foco.
 
-View your app in AI Studio: https://ai.studio/apps/temp/2
+## 📱 Screenshots
 
-## Run Locally
+| Tela Inicial | Adicionar Missão | Splash Screen |
+|:---:|:---:|:---:|
+| | | |
 
-**Prerequisites:**  Node.js
+## 🚀 Tecnologias Utilizadas
 
+Este projeto foi desenvolvido utilizando as tecnologias mais modernas do ecossistema JavaScript:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+-   **Frontend:** [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+-   **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+-   **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
+-   **Mobile/Nativo:** [Capacitor](https://capacitorjs.com/) (Geração de APK Android)
+-   **Ícones:** Lucide React
+
+## ✨ Funcionalidades
+
+-   ✅ **Gerenciamento de Missões:** Criação de tarefas com prioridades e tipos (Comum/Foco).
+-   🔄 **Recorrência:** Sistema de hábitos diários.
+-   🏆 **Gamificação:** Ganhe XP e suba de nível ao completar tarefas.
+-   🎨 **Temas:** Suporte a múltiplos temas visuais (Default, Onyx, Crimson).
+-   📱 **Mobile-First:** Interface 100% adaptada para gestos e telas de toque.
+
+## 🔧 Como rodar o projeto
+
+```bash
+# Clone este repositório
+git clone [https://github.com/SEU_USUARIO/Aegis.git](https://github.com/SEU_USUARIO/Aegis.git)
+
+# Instale as dependências
+npm install
+
+# Rodar no navegador (Desenvolvimento)
+npm run dev
+
+# Gerar Build para Android
+npm run build
+npx cap sync
+npx cap open android
