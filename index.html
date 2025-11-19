@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <title>Aegis</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+      /* --- 1. Configuração de Área Segura (Notch/Gestos) --- */
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sab: env(safe-area-inset-bottom);
+      }
+
+      body {
+        margin: 0;
+        box-sizing: border-box;
+        
+        /* IMPORTANTE: Usa a variável do seu tema escuro para não ficar com bordas brancas */
+        background-color: var(--bg-primary, #264464); 
+        
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.3s ease;
+      }
+
+      /* Garante que o React ocupe tudo */
+      #root {
+        /* Garante altura total e aplica o padding da área segura */
+        min-height: 100vh; /* Fallback para navegadores antigos */
+        min-height: 100dvh; /* Altura dinâmica para compatibilidade móvel moderna */
+        width: 100vw;
+        padding-top: var(--sat);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: var(--sab);
+        box-sizing: border-box;
+      }
+
+      /* --- 2. Suas Definições de Tema --- */
+      .font-display {
+        font-family: 'Rajdhani', sans-serif;
+      }
+      
+      :root, .theme-default {
+        --bg-primary: #264464;
+        --bg-secondary: #1a2a44;
+        --bg-tertiary: #334155;
+        --bg-quaternary: #1e293b;
+        --bg-input: rgba(15, 23, 42, 0.5);
+        --border-color: rgba(51, 65, 85, 0.8);
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --accent: #E5B33E;
+        --accent-text: #101827;
+        --accent-shadow: rgba(229, 179, 62, 0.2);
+      }
+
+      .theme-onyx {
+        --bg-primary: #000000;
+        --bg-secondary: #111111;
+        --bg-tertiary: #222222;
+        --bg-quaternary: #1a1a1a;
+        --bg-input: rgba(26, 26, 26, 0.8);
+        --border-color: #333333;
+        --text-primary: #f5f5f5;
+        --text-secondary: #a3a3a3;
+        --text-muted: #737373;
+        --accent: #D4AF37;
+        --accent-text: #000000;
+        --accent-shadow: rgba(212, 175, 55, 0.2);
+      }
+
+      .theme-crimson {
+        --bg-primary: #121212;
+        --bg-secondary: #1E1E1E;
+        --bg-tertiary: #282828;
+        --bg-quaternary: #222222;
+        --bg-input: rgba(34, 34, 34, 0.8);
+        --border-color: #444444;
+        --text-primary: #f5f5f5;
+        --text-secondary: #a3a3a3;
+        --text-muted: #737373;
+        --accent: #DC143C;
+        --accent-text: #ffffff;
+        --accent-shadow: rgba(220, 20, 60, 0.2);
+      }
+      
+      /* --- 3. Animações --- */
+      @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes view-transition-anim { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes achievement-popup {
+        0% { transform: translateY(100%); opacity: 0; }
+        15% { transform: translateY(0); opacity: 1; }
+        85% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(100%); opacity: 0; }
+      }
+      .animate-achievement-popup { animation: achievement-popup 5s ease-in-out forwards; }
+      .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+      .animate-slide-up { animation: slide-up 0.4s ease-out forwards; }
+      .animate-view-transition { animation: view-transition-anim 0.35s ease-out forwards; }
+
+      @keyframes beautiful-delete {
+        0% { opacity: 1; transform: scale(1); }
+        20% { transform: scale(1.02); }
+        100% { opacity: 0; transform: scale(0.8); height: 0; padding: 0; margin: 0; border-width: 0; }
+      }
+      .task-deleting { animation: beautiful-delete 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+      
+      @keyframes pop-effect {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+        50% { transform: scale(1.1); box-shadow: 0 0 10px 5px rgba(45, 212, 191, 0.3); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+      }
+      .task-completing { animation: pop-effect 0.4s ease-in-out; }
+
+      @keyframes draw-check { to { stroke-dashoffset: 0; } }
+      .check-path { stroke-dasharray: 50; stroke-dashoffset: 50; }
+      .check-path-animated { animation: draw-check 0.5s ease-in-out forwards; }
+      
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
